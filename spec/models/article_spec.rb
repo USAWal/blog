@@ -3,6 +3,18 @@ require 'support/shared/validation'
 require 'support/shared/persisting'
 
 RSpec.describe Article, type: :model do
+  context 'with empty title' do
+    let(:instance) { build :article, title: '' }
+
+    it_behaves_like 'an invalid'
+  end
+
+  context 'with omitted title' do
+    let(:instance) { build :article, title: nil }
+
+    it_behaves_like 'not persistable', ActiveRecord::StatementInvalid
+  end
+
   context 'with empty body' do
     let(:instance) { build :article, body: '' }
 

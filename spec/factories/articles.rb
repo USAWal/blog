@@ -1,5 +1,9 @@
 FactoryGirl.define do
   factory :article do
+    sequence :title do |index|
+      "Article example \##{index}"
+    end
+
     body <<-BODY
  Heading
  =======
