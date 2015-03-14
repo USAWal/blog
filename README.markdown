@@ -1,5 +1,6 @@
-Blog application
+Blog application [![Build Status](https://travis-ci.org/USAWal/blog.svg?branch=master)](https://travis-ci.org/USAWal/blog)
 ================
+
 
 Description
 -----------
