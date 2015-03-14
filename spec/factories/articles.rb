@@ -36,5 +36,15 @@ FactoryGirl.define do
  The rain---not the reign---in
  Spain.
  BODY
+
+    factory :commented_article do
+      transient do
+        comments_count 5
+      end
+
+      after :create do |article, evaluator|
+        create_list :queued_comment, evaluator.comments_count, article: article
+      end
+    end
   end
 end
