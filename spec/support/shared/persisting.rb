@@ -1,6 +1,6 @@
 RSpec.shared_examples 'persistable' do
   it 'raises no error on persisting' do
-    expect { instance.save! validation: false }.to_not raise_error
+    expect { instance.save! validate: false }.to_not raise_error
   end
 end
 

@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'support/shared/validation'
+require 'support/shared/persisting'
 
 RSpec.describe Comment, type: :model do
   context 'with empty body' do
@@ -18,6 +20,13 @@ RSpec.describe Comment, type: :model do
 
     it_behaves_like 'an invalid'
     it_behaves_like 'not persistable', ActiveRecord::StatementInvalid
+  end
+
+  context 'with omitted author' do
+    let(:instance) { build :comment, author: nil }
+
+    it_behaves_like 'an invalid'
+    it_behaves_like 'persistable'
   end
 
   context 'with properly filled fields' do

@@ -47,6 +47,10 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.4.1'
 end
 
+group :test do
+  gem 'rspec-sidekiq', '~> 2.0.0'
+end
+
 gem 'devise', '~> 3.4.1'
 gem 'sidekiq', '~> 3.3.2'
 gem 'sinatra', '~> 1.4.5'
