@@ -1,6 +1,17 @@
 require 'rails_helper'
+require 'support/shared/persisting'
 
 RSpec.describe User, type: :model do
+  context 'with omitted subscribed field' do
+    let(:instance) { build :user, subscribed: nil }
+
+    it_behaves_like 'not persistable', ActiveRecord::StatementInvalid
+  end
+
+  it 'is initially unsibscribed' do
+    expect(create(:user).subscribed).to eq false
+  end
+
   context 'with some comments' do
     let(:user) { create :active_user }
 

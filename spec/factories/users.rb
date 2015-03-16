@@ -3,6 +3,12 @@ FactoryGirl.define do
     sequence(:email)    { |index| "address_#{index}@box.com" }
     sequence(:password) { |index| "password#{index}" }
 
+    trait :subscribed do
+      subscribed true
+    end
+
+    factory subscribed_user, traits: [:subscribed]
+
     factory :active_user do
       transient do
         comments_count 5
