@@ -49,6 +49,7 @@ end
 
 group :test do
   gem 'rspec-sidekiq', '~> 2.0.0'
+  gem 'capybara', '~> 2.4.4'
 end
 
 gem 'devise', '~> 3.4.1'

@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  article_mailer:
+    notification:
+      subject: "Don't blink new article at blog!"

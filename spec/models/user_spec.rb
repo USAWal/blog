@@ -12,6 +12,14 @@ RSpec.describe User, type: :model do
     expect(create(:user).subscribed).to eq false
   end
 
+  context 'is subscribed' do
+    before(:each) { create :subscribed_user }
+
+    context 'article was created' do
+      before(:each) { create :article }
+    end
+  end
+
   context 'with some comments' do
     let(:user) { create :active_user }
 

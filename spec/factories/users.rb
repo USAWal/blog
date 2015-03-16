@@ -7,7 +7,7 @@ FactoryGirl.define do
       subscribed true
     end
 
-    factory subscribed_user, traits: [:subscribed]
+    factory :subscribed_user, traits: [:subscribed]
 
     factory :active_user do
       transient do
