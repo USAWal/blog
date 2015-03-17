@@ -18,9 +18,12 @@ RSpec.describe ArticleMailer, type: :mailer do
       expect(mail.from).to match_array ['owner@blog.co.uk']
     end
 
-    it "renders the body" do
+    it "contains article link" do
       expect(mail.html_part.body).to have_link 'here', href: article_url(article)
     end
-  end
 
+    it "contains unsubscribe link" do
+      expect(mail.html_part.body).to have_link 'Unsubscribe', href: unsubscribe_url(redirect_to: article_url(article))
+    end
+  end
 end
