@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  root 'articles#index'
+
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -11,9 +13,6 @@ Rails.application.routes.draw do
   get 'unsubscribe', to: 'welcome#unsubscribe', as: 'unsubscribe'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
