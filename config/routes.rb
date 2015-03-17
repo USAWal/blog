@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :articles, only: [:show]
+  resources :articles, only: [:show, :index]
 
   devise_for :users
   get 'unsubscribe', to: 'welcome#unsubscribe', as: 'unsubscribe'

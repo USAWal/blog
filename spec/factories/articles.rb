@@ -41,6 +41,11 @@ FactoryGirl.define do
  Spain.
  BODY
 
+    trait :queued do
+      sequence(:created_at) { |counter| Time.now + counter.seconds }
+    end
+
+    factory :queued_article, traits: [:queued]
     factory :commented_article do
       transient do
         comments_count 5
