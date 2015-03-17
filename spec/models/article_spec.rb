@@ -47,6 +47,42 @@ RSpec.describe Article, type: :model do
     end
   end
 
+  context 'there are some unsubscribed users' do
+    before(:each) { create_list :user, 3 }
+
+    context 'there are some subscribed users' do
+      before(:each) { create_list :subscribed_user, 5 }
+
+      context 'article was created' do
+        before(:each) { create :article }
+
+        it 'should delay notification routine' do
+          expect(Article.method :notify).to be_delayed Article.first.id
+        end
+
+        context 'sidekiq jobs were drained' do
+          before(:each) { Sidekiq::Worker.drain_all }
+
+          it 'should deliver emails for all subscribed users' do
+            expect(ActionMailer::Base.deliveries.last(5).map { |mail| mail.to[0] }).to match_array User.where(subscribed: true).pluck(:email)
+          end
+
+          it 'should deliver notifications' do
+            expect(ActionMailer::Base.deliveries.last(5).map &:subject).to eq ["Don't blink new article at blog!"] * 5
+          end
+        end
+
+        context 'article was destroied' do
+          before(:each) { Article.destroy_all }
+
+          it 'performs notifying without errors' do
+            expect { Sidekiq::Worker.drain_all }.to_not raise_error
+          end
+        end
+      end
+    end
+  end
+
   context 'with properly filled fields' do
     let(:instance) { build :article }
 
