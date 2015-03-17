@@ -7,10 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="container">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
-  <%= yield %>
-
+    <%= yield %>
+    <div class="footer">
+      <div class="container">
+        <div class="clearfix">
+          <div class="footer-logo">
+            <a>
+              <%= image_tag 'logo.png' %>
+            </a>
+          </div>
+        </div>
+        <div class="footer-copyright text-center">
+          <%= t 'copyright' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

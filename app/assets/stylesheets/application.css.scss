@@ -14,4 +14,12 @@
  *= require_self
  */
 
-@import "bootflat"
+@import "bootflat";
+
+.footer {
+  &-logo {
+    & img {
+        height: 32px;
+    }
+  }
+}
