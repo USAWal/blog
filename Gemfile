@@ -55,3 +55,4 @@ end
 gem 'devise', '~> 3.4.1'
 gem 'sidekiq', '~> 3.3.2'
 gem 'sinatra', '~> 1.4.5'
+gem 'friendly_id', '~> 5.1.0'

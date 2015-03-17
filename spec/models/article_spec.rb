@@ -86,6 +86,14 @@ RSpec.describe Article, type: :model do
   context 'with properly filled fields' do
     let(:instance) { build :article }
 
+    context 'was persisted' do
+      before(:each) { instance.save! }
+
+      it 'should be searchable by friendly id' do
+        expect(Article.friendly.find instance.title).to eq Article.find instance.id
+      end
+    end
+
     it_behaves_like 'a valid'
     it_behaves_like 'persistable'
   end
