@@ -25,5 +25,9 @@ RSpec.describe 'articles/index.html.erb', type: :feature do
     it 'contains link to home into navbar' do
       expect(navbar).to have_link 'blog', root_path
     end
+
+    it 'contains sign in button' do
+      expect(navbar.find("#navbar_collapse.collapse.navbar-collapse > a[href=\"#{new_user_session_path}\"] > button.btn.btn-danger.navbar-btn[type=\"button\"]").text).to eq 'Sign in'
+    end
   end
 end
