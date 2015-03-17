@@ -21,6 +21,7 @@
 
 en:
   copyright: "Copyright © 2015 blog.co.uk.All rights reserved."
+  home_link: "blog"
   article_mailer:
     notification:
       subject: "Don't blink new article at blog!"
