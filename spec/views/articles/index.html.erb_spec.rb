@@ -47,7 +47,7 @@ RSpec.describe 'articles/index.html.erb', type: :view do
       end
 
       it 'has articles body paragraphs' do
-        expect(timeline).to have_selector '.events > .events-body > p', count: articles.count
+        expect(timeline).to have_selector '.events > .events-body > p', count: articles.count * 2
       end
 
       it 'has articles html body first 300 symbols text' do
@@ -63,6 +63,12 @@ RSpec.describe 'articles/index.html.erb', type: :view do
       it 'has dates' do
         articles.map { |article| article.created_at.to_date }.uniq.each do |date|
           expect(timeline).to have_text date
+        end
+      end
+
+      it 'has links' do
+        articles.each do |article|
+          expect(timeline).to have_link 'Read more', href: article_path(article)
         end
       end
     end

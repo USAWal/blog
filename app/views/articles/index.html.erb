@@ -13,6 +13,11 @@
                   <%= article.title %>
                 </h4>
                 <p><%= truncate article.text_body, length: 300 %></p>
+                <p>
+                  <%= link_to article_path article do %>
+                    <button type="button" class="btn btn-success btn-block">Read more</button>
+                  <% end %>
+                </p>
               </div>
             </div>
           </dd>
