@@ -92,6 +92,46 @@ RSpec.describe Article, type: :model do
       it 'should be searchable by friendly id' do
         expect(Article.friendly.find instance.title).to eq Article.find instance.id
       end
+
+      it 'should convert Markdown to html' do
+        expect(instance.html_body).to eq <<HTML_BODY
+<h1>Heading</h1>
+
+<h2>Sub-heading</h2>
+
+<h3>Another deeper heading</h3>
+
+<p>Paragraphs are separated
+by a blank line.</p>
+
+<p>Let 2 spaces at the end of a line to do a<br>
+line break</p>
+
+<p>Text attributes <em>italic</em>, <strong>bold</strong>,
+<code>monospace</code>, <del>strikethrough</del> .</p>
+
+<p>A <a href="http://example.com">link</a>.</p>
+
+<p>Shopping list:</p>
+
+<ul>
+<li>apples</li>
+<li>oranges</li>
+<li>pears</li>
+</ul>
+
+<p>Numbered list:</p>
+
+<ol>
+<li>apples</li>
+<li>oranges</li>
+<li>pears</li>
+</ol>
+
+<p>The rain---not the reign---in
+Spain.</p>
+HTML_BODY
+      end
     end
 
     it_behaves_like 'a valid'

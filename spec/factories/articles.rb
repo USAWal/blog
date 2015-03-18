@@ -5,41 +5,40 @@ FactoryGirl.define do
     end
 
     body <<-BODY
- Heading
- =======
+Heading
+=======
  
- Sub-heading
- -----------
+Sub-heading
+-----------
  
- ### Another deeper heading
+### Another deeper heading
  
- Paragraphs are separated
- by a blank line.
+Paragraphs are separated
+by a blank line.
  
- Let 2 spaces at the end of a line to do a  
- line break
+Let 2 spaces at the end of a line to do a  
+line break
  
- Text attributes *italic*, **bold**,
- `monospace`, ~~strikethrough~~ .
+Text attributes *italic*, **bold**,
+`monospace`, ~~strikethrough~~ .
  
- A [link](http://example.com).
- <<<   No space between ] and (  >>>
+A [link](http://example.com).
 
- Shopping list:
- 
-   * apples
-   * oranges
-   * pears
- 
- Numbered list:
- 
-   1. apples
-   2. oranges
-   3. pears
- 
- The rain---not the reign---in
- Spain.
- BODY
+Shopping list:
+
+  * apples
+  * oranges
+  * pears
+
+Numbered list:
+
+  1. apples
+  2. oranges
+  3. pears
+
+The rain---not the reign---in
+Spain.
+BODY
 
     trait :queued do
       sequence(:created_at) { |counter| Time.now + counter.seconds }
