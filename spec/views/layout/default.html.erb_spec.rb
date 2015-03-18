@@ -48,6 +48,10 @@ RSpec.describe 'articles/index.html.erb', type: [:feature, :controller] do
       it 'contains edit user button' do
         expect(navbar.find("#navbar_collapse.collapse.navbar-collapse > a[href=\"#{edit_user_registration_path}\"] > button.btn.btn-danger.navbar-btn[type=\"button\"]").text).to eq 'Edit user'
       end
+
+      it 'contains sign out button' do
+        expect(navbar.find("#navbar_collapse.collapse.navbar-collapse > a[href=\"#{destroy_user_session_path}\"] > button.btn.btn-danger.navbar-btn[type=\"button\"]").text).to eq 'Sign out'
+      end
     end
   end
 end

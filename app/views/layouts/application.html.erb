@@ -14,9 +14,16 @@
           <%= link_to t('home_link'), root_path, class: 'navbar-brand' %>
         </div>
         <div class="collapse navbar-collapse" id="navbar_collapse">
-          <%= link_to user_signed_in? ? edit_user_registration_path : new_user_session_path do %>
-            <%= button_tag type: 'button', class: 'btn btn-danger navbar-btn' do %>
-              <%= user_signed_in? ? 'Edit user' : 'Sign in' %>
+          <% if user_signed_in? %>
+            <%= link_to edit_user_registration_path do %>
+              <%= button_tag 'Edit user', type: 'button', class: 'btn btn-danger navbar-btn' %>
+            <% end %>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <%= button_tag 'Sign out', type: 'button', class: 'btn btn-danger navbar-btn' %>
+            <% end %>
+          <% else %>
+            <%= link_to new_user_session_path do %>
+              <%= button_tag 'Sign in', type: 'button', class: 'btn btn-danger navbar-btn' %>
             <% end %>
           <% end %>
         </div>
