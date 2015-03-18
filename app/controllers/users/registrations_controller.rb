@@ -3,6 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_account_update_params, only: [:update]
 
   def unsubscribe
+    current_user.update subscribed: false
+    redirect_to root_path, notice: 'You have successfully unsubscribed!'
   end
 
   # GET /resource/sign_up
