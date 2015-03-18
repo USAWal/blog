@@ -18,6 +18,10 @@ class Article < ActiveRecord::Base
     end if article
   end
 
+  def comments_tree
+    Comment.tree comments
+  end
+
   private
 
   def update_html_body

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "articles/show.html.erb", type: :view do
   context 'there\'s an article' do
     let(:content) { page.find '.container > .row > .col-md-8.col-md-offset-2.text-center' }
-    before(:each) { create :article }
+    before(:each) { create :commented_article }
 
     context 'articl\'s page was requested' do
       let(:article) { Article.first }
@@ -23,6 +23,28 @@ RSpec.describe "articles/show.html.erb", type: :view do
 
       it 'contains html body' do
         expect(page.html).to include article.html_body
+      end
+    end
+
+    context 'some replies were created' do
+      let(:article) { Article.first }
+      before(:each) do
+        article.comments.each_with_index do |comment, index|
+          create_list :comment, 3, article: article, replied_to: comment if index.odd?
+        end
+      end
+
+      context 'articl\'s page was requested' do
+        let(:comments_list) { content.find 'ul.media-list' }
+        before(:each) { visit article_path article }
+
+        it 'should have comments list' do
+          expect(content).to have_selector 'ul.media-list'
+        end
+
+        it 'should have comments containers' do
+          expect(comments_list).to have_selector '.media', count: article.comments.count
+        end
       end
     end
   end

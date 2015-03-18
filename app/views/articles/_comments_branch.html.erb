@@ -1,0 +1,5 @@
+<% branches.each do |branch| %>
+  <div class="media">
+    <%= render partial: 'comments_branch', locals: { branches: branch.second } %>
+  </div>
+<% end %>

@@ -27,6 +27,26 @@ RSpec.describe Article, type: :model do
     it_behaves_like 'not persistable', ActiveRecord::StatementInvalid
   end
 
+  context 'has 5 comments' do
+    let(:article) { create :article }
+    before(:each) { create_list :queued_comment, 5, article: article, replied_to: nil }
+
+    def tree_comments(comments)
+      comments.map do |comment|
+        [comment, comment.replies.any? ? tree_comments(comment.replies) : []]
+      end
+    end
+
+    context 'second comment has 4 replies' do
+      let(:comment) { article.comments.second }
+      before(:each) { create_list :queued_comment, 4, article: article, replied_to: comment }
+
+      it 'should return article comments tree' do
+        expect(article.comments_tree).to eq tree_comments article.comments
+      end
+    end
+  end
+
   context 'with some comments' do
     let(:article) { create :commented_article }
 

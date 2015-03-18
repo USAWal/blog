@@ -34,5 +34,22 @@ RSpec.describe Comment, type: :model do
 
     it_behaves_like 'a valid'
     it_behaves_like 'persistable'
+
+    context 'was persisted' do
+      before(:each) { instance.save! }
+
+      context 'another comment is reply for the first one' do
+        let(:reply) { create :comment, article: instance.article, replied_to: instance }
+        before(:each) { reply }
+
+        it 'should have replies containg the last comment' do
+          expect(instance.replies).to match_array [reply]
+        end
+
+        it 'should be replied_to object of its replies' do
+          expect(instance.equal? instance.replies.first.replied_to).to be_truthy
+        end
+      end
+    end
   end
 end

@@ -26,11 +26,12 @@ ActiveRecord::Schema.define(version: 20150317123414) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "article_id", null: false
+    t.integer  "article_id",    null: false
     t.integer  "author_id"
-    t.text     "body",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "replied_to_id"
+    t.text     "body",          null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
