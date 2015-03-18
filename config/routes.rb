@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
-  get 'unsubscribe', to: 'welcome#unsubscribe', as: 'unsubscribe'
+
+  authenticate :user do
+    devise_scope :user do
+      get :unsubscribe, to: 'users/registrations#unsubscribe', as: 'unsubscribe'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

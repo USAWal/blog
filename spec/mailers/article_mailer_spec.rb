@@ -23,7 +23,7 @@ RSpec.describe ArticleMailer, type: :mailer do
     end
 
     it "contains unsubscribe link in html variety" do
-      expect(mail.html_part.body).to have_link 'Unsubscribe', href: unsubscribe_url(redirect_to: article_url(article))
+      expect(mail.html_part.body).to have_link 'Unsubscribe', href: unsubscribe_url
     end
 
     it "contains article link in text variety" do
@@ -31,7 +31,7 @@ RSpec.describe ArticleMailer, type: :mailer do
     end
 
     it "contains unsubscribe link in text variety" do
-      expect(mail.text_part.body).to include unsubscribe_url(redirect_to: article_url(article))
+      expect(mail.text_part.body).to include unsubscribe_url
     end
   end
 end
