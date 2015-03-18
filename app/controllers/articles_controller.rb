@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
     @articles = Article.order(created_at: :desc).page params[:page]
   end
 
-#  def show
-#  end
+  def show
+    @article = Article.friendly.find params[:id]
+  end
 end

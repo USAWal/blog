@@ -27,5 +27,21 @@ RSpec.describe ArticlesController, type: :controller do
         expect(assigns :articles).to eq Article.order(created_at: :desc).offset(10).first 10
       end
     end
+
+    context 'article was requested' do
+      before(:each) { get :show, id: Article.first.friendly_id }
+
+      it 'assigns @article to found article' do
+        expect(assigns :article).to eq Article.first
+      end
+
+      it 'returns http success' do
+        expect(response).to have_http_status :success
+      end
+
+      it 'renders show template' do
+        expect(response).to render_template :show
+      end
+    end
   end
 end

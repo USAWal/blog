@@ -1,2 +1,7 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<div class="col-md-8 col-md-offset-2 text-center">
+  <h1><%= @article.title %></h1>
+  <hr />
+  <div class="text-left">
+    <%= @article.html_body.html_safe %>
+  </div>
+</div>
