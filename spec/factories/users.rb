@@ -7,7 +7,12 @@ FactoryGirl.define do
       subscribed true
     end
 
+    trait :confirmed do
+      confirmed_at Time.now
+    end
+
     factory :subscribed_user, traits: [:subscribed]
+    factory :confirmed_user,  traits: [:confirmed]
 
     factory :active_user do
       transient do

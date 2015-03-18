@@ -1,6 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'articles/index.html.erb', type: :feature do
+RSpec.describe 'articles/index.html.erb', type: [:feature, :controller] do
+  include Warden::Test::Helpers
+
+  let(:navbar) { page.find 'nav.navbar.navbar-inverse > .container-fluid' }
+
   context 'root page was requested' do
     before(:each) { visit root_path }
 
@@ -16,8 +20,6 @@ RSpec.describe 'articles/index.html.erb', type: :feature do
       expect(page).to have_text 'Copyright © 2015 blog.co.uk.All rights reserved.'
     end
 
-    let(:navbar) { page.find 'nav.navbar.navbar-inverse > .container-fluid' }
-
     it 'contains navbar\'s home url' do
       expect(navbar).to have_selector '.navbar-header > a.navbar-brand'
     end
@@ -28,6 +30,24 @@ RSpec.describe 'articles/index.html.erb', type: :feature do
 
     it 'contains sign in button' do
       expect(navbar.find("#navbar_collapse.collapse.navbar-collapse > a[href=\"#{new_user_session_path}\"] > button.btn.btn-danger.navbar-btn[type=\"button\"]").text).to eq 'Sign in'
+    end
+  end
+
+  context 'user is signed in' do
+    let(:user) { create :confirmed_user }
+    before(:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      Warden.test_mode!
+      login_as(user, :scope => :user)
+    end
+    after(:each) { Warden.test_reset! }
+
+    context 'root page was requested' do
+      before(:each) { visit root_path }
+
+      it 'contains edit user button' do
+        expect(navbar.find("#navbar_collapse.collapse.navbar-collapse > a[href=\"#{edit_user_registration_path}\"] > button.btn.btn-danger.navbar-btn[type=\"button\"]").text).to eq 'Edit user'
+      end
     end
   end
 end

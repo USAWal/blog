@@ -14,9 +14,9 @@
           <%= link_to t('home_link'), root_path, class: 'navbar-brand' %>
         </div>
         <div class="collapse navbar-collapse" id="navbar_collapse">
-          <%= link_to new_user_session_path do %>
+          <%= link_to user_signed_in? ? edit_user_registration_path : new_user_session_path do %>
             <%= button_tag type: 'button', class: 'btn btn-danger navbar-btn' do %>
-              Sign in
+              <%= user_signed_in? ? 'Edit user' : 'Sign in' %>
             <% end %>
           <% end %>
         </div>
