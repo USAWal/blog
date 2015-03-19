@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'open-uri'
+
+markdown_repos = ["rails/rails", "capistrano/capistrano" , "orientechnologies/orientdb"]
+
+markdown_repos.each_with_index do |repo, index|
+  body = open("https://raw.githubusercontent.com/#{repo}/master/README.md") { |page| page.read }
+  Article.create title: repo, body: body, created_at: Time.now - (11 * index).hours
+end
