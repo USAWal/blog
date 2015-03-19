@@ -1,5 +1,5 @@
 <% branches.each do |branch| %>
-  <div class="media">
+  <div id="comment_<%= branch.is_a?(Hash) ? branch.keys.first.id : branch.id %>" class="media">
     <%= image_tag 'message.png', class: 'pull-left media-object img-rounded logo' %>
     <div class="media-body">
       <p><%= branch.is_a?(Hash) ? branch.keys.first.created_at : branch.created_at %></p>

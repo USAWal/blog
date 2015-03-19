@@ -79,6 +79,12 @@ RSpec.describe "articles/show.html.erb", type: :view do
               expect(comments_list).to have_selector "button[data-replied-to=\"#{comment.id}\"]"
             end
           end
+
+          it 'has comment id for all comments' do
+            article.comments.each do |comment|
+              expect(comments_list).to have_selector "#comment_#{comment.id}.media"
+            end
+          end
         end
       end
 

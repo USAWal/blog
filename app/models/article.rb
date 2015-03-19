@@ -26,7 +26,7 @@ class Article < ActiveRecord::Base
         parent_node = grouped_comments[key.replied_to]
         parent_node[parent_node.find_index key] = { key => grouped_comments[key] }
       end
-    end
+    end || { nil => {} }
   end
 
   private
