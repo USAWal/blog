@@ -1,5 +1,10 @@
 <% branches.each do |branch| %>
   <div class="media">
-    <%= render partial: 'comments_branch', locals: { branches: branch.second } %>
+    <%= image_tag 'message.png', class: 'pull-left media-object img-rounded logo' %>
+    <div class="media-body">
+      <p><%= branch.is_a?(Hash) ? branch.keys.first.created_at : branch.created_at %></p>
+      <p><%= branch.is_a?(Hash) ? branch.keys.first.body : branch.body %></p>
+      <%= render partial: 'comments_branch', locals: { branches: branch.values.first } if branch.is_a?(Hash) %>
+    </div>
   </div>
 <% end %>

@@ -31,18 +31,16 @@ RSpec.describe Article, type: :model do
     let(:article) { create :article }
     before(:each) { create_list :queued_comment, 5, article: article, replied_to: nil }
 
-    def tree_comments(comments)
-      comments.map do |comment|
-        [comment, comment.replies.any? ? tree_comments(comment.replies) : []]
-      end
-    end
-
     context 'second comment has 4 replies' do
       let(:comment) { article.comments.second }
       before(:each) { create_list :queued_comment, 4, article: article, replied_to: comment }
 
       it 'should return article comments tree' do
-        expect(article.comments_tree).to eq tree_comments article.comments
+        result = article.comments.group_by(&:replied_to)
+        result.reject! do |key, value|
+          result[key.replied_to][result[key.replied_to].find_index key] = { key => result[key] } if key
+        end
+        expect(article.comments_tree).to eq result
       end
     end
   end

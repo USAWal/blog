@@ -35,15 +35,27 @@ RSpec.describe "articles/show.html.erb", type: :view do
       end
 
       context 'articl\'s page was requested' do
-        let(:comments_list) { content.find 'ul.media-list' }
+        let(:comments_list) { content.find '.media-list' }
         before(:each) { visit article_path article }
 
         it 'should have comments list' do
-          expect(content).to have_selector 'ul.media-list'
+          expect(content).to have_selector '.media-list'
         end
 
         it 'should have comments containers' do
-          expect(comments_list).to have_selector '.media', count: article.comments.count
+          expect(comments_list).to have_selector '.media > .media-body', count: article.comments.count
+        end
+
+        it 'should have creation time of all comments' do
+          article.comments.each do |comment|
+            expect(comments_list).to have_text comment.created_at.to_s
+          end
+        end
+
+        it 'should have bodies of all comments' do
+          article.comments.each do |comment|
+            expect(comments_list).to have_text comment.body
+          end
         end
       end
     end

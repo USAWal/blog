@@ -4,7 +4,7 @@
   <div class="text-left">
     <%= @article.html_body.html_safe %>
   </div>
-  <ul class="media-list">
-    <%= render partial: 'comments_branch', locals: { branches: @article.comments_tree } %>
-  </ul>
+  <div class="media-list text-left">
+    <%= render partial: 'comments_branch', locals: { branches: @article.comments_tree[nil] } %>
+  </div>
 </div>

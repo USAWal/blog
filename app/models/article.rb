@@ -19,7 +19,14 @@ class Article < ActiveRecord::Base
   end
 
   def comments_tree
-    Comment.tree comments
+    grouped_comments = comments.includes(:replied_to).group_by &:replied_to
+    return grouped_comments if grouped_comments.count == 1
+    grouped_comments.reject! do |key, value|
+      if key
+        parent_node = grouped_comments[key.replied_to]
+        parent_node[parent_node.find_index key] = { key => grouped_comments[key] }
+      end
+    end
   end
 
   private
