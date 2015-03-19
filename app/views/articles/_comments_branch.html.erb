@@ -4,6 +4,7 @@
     <div class="media-body">
       <p><%= branch.is_a?(Hash) ? branch.keys.first.created_at : branch.created_at %></p>
       <p><%= branch.is_a?(Hash) ? branch.keys.first.body : branch.body %></p>
+      <%= button_tag 'Reply', type: 'button', class: 'btn btn-success media-object', data: { 'replied-to' => (branch.is_a?(Hash) ? branch.keys.first.id : branch.id) } %>
       <%= render partial: 'comments_branch', locals: { branches: branch.values.first } if branch.is_a?(Hash) %>
     </div>
   </div>

@@ -35,6 +35,14 @@ RSpec.describe ArticlesController, type: :controller do
         expect(assigns :article).to eq Article.first
       end
 
+      it 'assigns @comment to new comment' do
+        expect(assigns(:comment).new_record?).to be_truthy
+      end
+
+      it 'assigns @comment article to found article' do
+        expect(assigns(:comment).article).to eq Article.first
+      end
+
       it 'returns http success' do
         expect(response).to have_http_status :success
       end

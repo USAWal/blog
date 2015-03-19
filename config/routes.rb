@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :articles, only: [:show, :index]
+  authenticate :user do
+    resources :comments, only: [:create]
+  end
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'

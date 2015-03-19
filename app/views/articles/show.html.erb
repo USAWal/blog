@@ -7,4 +7,18 @@
   <div class="media-list text-left">
     <%= render partial: 'comments_branch', locals: { branches: @article.comments_tree[nil] } %>
   </div>
+  <br />
+  <div class="row">
+    <%= form_for @comment do |form| %>
+      <%= form.hidden_field :article_id %>
+      <%= form.hidden_field :replied_to_id %>
+      <div class="col-md-10">
+        <%= form.text_area :body, class: 'form-control', rows: 6 %>
+      </div>
+      <div class="col-md-2">
+        <%= form.submit 'Send', class: 'btn btn-success btn-block' %>
+      </div>
+    <% end %>
+  </div>
+  <br />
 </div>

@@ -5,5 +5,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.friendly.find params[:id]
+    @comment = @article.comments.build
   end
 end
