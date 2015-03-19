@@ -48,8 +48,13 @@ The things you should keep in mind before starting
 * bundle install
 * run Postgresql
 * run Redis
-* createdb blog_development
-* createdb blog_test
-* bundle exec rake db:create db:migrate db:seed
-* bundle exec sidekiq -q default -q mailers
-* rails s
+* createdb blog_development`
+* createdb blog_test`
+* `bundle exec rake db:create db:migrate db:seed`
+* `bundle exec sidekiq -q default -q mailers`
+* `bundle exec rails s`
+
+You didn't not implement admin page, how can I add an article?
+--------------------------------------------------------------
+
+`bundle exec rake articles:create`
